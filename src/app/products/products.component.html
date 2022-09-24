@@ -1,0 +1,54 @@
+<div class="container">
+  <ng-template #errors>
+    <div class="alert alert-danger">{{ errorMessage}}</div>
+  </ng-template>
+
+
+  <div class="card" *ngIf="products; else errors">
+    <div class="card-header">Products List</div>
+    <div class="card-body">
+      {{ searchFormGroup.value | json}}
+      <form [formGroup]="searchFormGroup" (ngSubmit)="handleSearchProduct()">
+        <div class="input-group">
+          <label class="input-group-text">Keyword</label>
+          <input type="text" class="form-control" formControlName="keyword">
+          <button class="btn btn-info"><i class="bi bi-search"></i></button>
+        </div>
+      </form>
+      <table class="table">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Promotion</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let p of products">
+           <td>{{ p.id }}</td>
+          <td>{{ p.name }}</td>
+          <td>{{ p.price }}</td>
+          <td><i *ngIf="p.promotion" class="bi bi-heart-fill text-success"></i></td>
+          <td>
+            <button (click)="handleSetPromotion(p)" [ngClass]="p.promotion ? 'btn btn-danger' : 'btn btn-success'">
+                 <span *ngIf="!p.promotion">Promo On</span>
+                 <span *ngIf="p.promotion">Promo Off</span>
+            </button>
+          </td>
+          <td>
+            <button (click)="handleDeleteProduct(p)" class="btn btn-danger"><i class="bi bi-trash "></i></button>
+          </td>
+
+        </tr>
+        </tbody>
+      </table>
+      <ul class="nav nav-pills">
+        <li *ngFor="let item of [].constructor(this.totalPages); let i =index">
+          <a (click)="goToPage(i)"  [ngClass]="i==currentPage? 'btn btn-info ms-1 mt-1' : 'btn btn-outline-info ms-1 mt-1'" >{{i}}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
