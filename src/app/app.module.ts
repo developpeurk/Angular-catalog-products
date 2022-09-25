@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import {ReactiveFormsModule} from "@angular/forms";
 import { LoginComponent } from './login/login.component';
 import { AdminTemplateComponent } from './admin-template/admin-template.component';
+import { NewProductComponent } from './new-product/new-product.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { AdminTemplateComponent } from './admin-template/admin-template.componen
     CustomersComponent,
     LoginComponent,
     AdminTemplateComponent,
+    NewProductComponent,
   ],
   imports: [
     BrowserModule,

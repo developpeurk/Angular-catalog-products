@@ -70,4 +70,10 @@ export class ProductService {
     return this.calculTotalPages(page, size, result);
 
   }
+
+  public addNewProduct(product: Product):Observable<Product>{
+    product.id = uuid.UUID()
+    this.products.push(product)
+    return of(product)
+  }
 }

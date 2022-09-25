@@ -3,6 +3,7 @@ import {ProductService} from "../services/product.service";
 import {Product} from "../model/product.model";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {AuthenticationService} from "../services/authentication.service";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -22,7 +23,8 @@ export class ProductsComponent implements OnInit {
 
   constructor(private productService: ProductService,
               private fb : FormBuilder,
-              public authService: AuthenticationService
+              public authService: AuthenticationService,
+              private router: Router
               ) { }
 
   ngOnInit(): void {
@@ -100,5 +102,9 @@ export class ProductsComponent implements OnInit {
   goToPage(i: number) {
     this.currentPage = i
     this.currentAction == "all" ? this.handleGetPageProducts() : this.handleSearchProduct()
+  }
+
+  handleNewProduct() {
+    this.router.navigateByUrl("/admin/newProduct")
   }
 }
