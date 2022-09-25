@@ -3,6 +3,7 @@ import {Observable, of, throwError} from "rxjs";
 import {PageProduct, Product} from "../model/product.model";
 import { UUID  as uuid} from 'angular2-uuid';
 import { faker } from '@faker-js/faker';
+import {ValidationErrors} from "@angular/forms";
 
 
 
@@ -76,4 +77,26 @@ export class ProductService {
     this.products.push(product)
     return of(product)
   }
+
+  public getOneProduct(id:string):Observable<Product>{
+    let product= this.products.find(p => p.id == id)
+    if(!product) return throwError(()=> new Error("Product not found"))
+    return of(product)
+  }
+
+
+  public updateProduct(product:Product):Observable<Product>{
+    this.products  = this.products.map(p=>(p.id==product.id)?product:p)
+    return of(product)
+  }
+
+  getErrorMessage(field: string, errors: ValidationErrors):string {
+    if(errors['required']) return field + " is required"
+    else if(errors['minlength']) return field + " should have at least " +
+      errors['minlength']['requiredLength'] + " Characters"
+    else if(errors['min']) return field + " should have at least " + errors['min']['min'] + " $"
+    return ""
+  }
+
+
 }

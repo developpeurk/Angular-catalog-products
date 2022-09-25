@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {ProductService} from "../services/product.service";
-import {Product} from "../model/product.model";
+import {ProductService} from "../../services/product.service";
+import {Product} from "../../model/product.model";
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {AuthenticationService} from "../services/authentication.service";
+import {AuthenticationService} from "../../services/authentication.service";
 import {Router} from "@angular/router";
 
 
@@ -106,5 +106,10 @@ export class ProductsComponent implements OnInit {
 
   handleNewProduct() {
     this.router.navigateByUrl("/admin/newProduct")
+  }
+
+  handleEditProduct(p: Product) {
+    this.router.navigateByUrl("/admin/editProduct/"+p.id)
+
   }
 }
