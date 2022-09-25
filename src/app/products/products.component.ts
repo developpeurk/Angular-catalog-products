@@ -84,7 +84,7 @@ export class ProductsComponent implements OnInit {
 
   handleSearchProduct() {
     this.currentAction = "search"
-      let keyword  = this.searchFormGroup.value.keyword
+    let keyword  = this.searchFormGroup.value.keyword
     this.productService.searchProduct(keyword,this.currentPage, this.pageSize).subscribe({
       next: (data)=>{
         this.products = data.products;
